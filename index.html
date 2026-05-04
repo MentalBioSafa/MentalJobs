@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Mental — Обучение менеджеров BioSafa</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --p:#1E6EE0;--pd:#1558B8;--s:#17B0C4;
+  --acc:#EAF2FF;--bg:#F7F9FC;--white:#fff;
+  --text:#0E1B2E;--muted:#5A6A7E;--border:#DDE5EF;
+  --ok:#0C9E5C;--warn:#E8A020;--danger:#D63E3E;
+  --r:14px;--sh:0 2px 16px rgba(30,110,224,.1);--shh:0 6px 32px rgba(30,110,224,.16);
+  --tr:.2s ease;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+h1,h2,h3{font-family:'Sora',sans-serif}
+
+.page{display:none;animation:fi .2s ease}
+.page.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+nav{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:99}
+.nav-prog{height:3px;background:var(--border)}
+.nav-prog-fill{height:100%;background:linear-gradient(90deg,var(--p),var(--s));transition:width .5s ease;width:0%}
+.nav-bar{max-width:700px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 18px;height:56px}
+.logo{display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none}
+.logo-ico{width:32px;height:32px;background:var(--p);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:.82rem;flex-shrink:0}
+.logo-name{font-family:'Sora',sans-serif;font-weight:700;font-size:.98rem;color:var(--p)}
+.nav-right{display:flex;align-items:center;gap:7px}
+.lang-btn{background:var(--white);border:1.5px solid var(--border);border-radius:100px;padding:5px 13px;font-size:.8rem;font-weight:600;cursor:pointer;color:var(--p);font-family:'Inter',sans-serif;transition:var(--tr);white-space:nowrap}
+.lang-btn:hover{background:var(--acc);border-color:var(--p)}
+.nav-user{font-size:.8rem;font-weight:500;color:var(--muted);background:var(--bg);padding:5px 11px;border-radius:100px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:12px 26px;border-radius:var(--r);font-weight:600;font-size:.9rem;cursor:pointer;border:none;transition:var(--tr);font-family:'Inter',sans-serif}
+.btn-p{background:var(--p);color:#fff;box-shadow:0 4px 14px rgba(30,110,224,.25)}.btn-p:hover{background:var(--pd);transform:translateY(-1px)}
+.btn-o{background:var(--white);color:var(--p);border:1.5px solid var(--border)}.btn-o:hover{border-color:var(--p);background:var(--acc)}
+.btn-full{width:100%}
+.btn-ok{background:var(--ok);color:#fff}.btn-ok:hover{opacity:.88}
+.btn-sm{padding:8px 16px;font-size:.82rem}
+
+.fg{margin-bottom:13px}
+.fl{display:block;font-size:.81rem;font-weight:600;margin-bottom:5px}
+.fi{width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:12px;font-size:.9rem;font-family:'Inter',sans-serif;background:var(--white);color:var(--text);transition:var(--tr)}
+.fi:focus{outline:none;border-color:var(--p);box-shadow:0 0 0 3px rgba(30,110,224,.1)}
+textarea.fi{resize:vertical}
+.card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);padding:20px}
+
+/* HOME */
+.home-wrap{max-width:600px;margin:0 auto;padding:44px 18px 60px}
+.home-top{text-align:center;margin-bottom:32px}
+.big-drop{font-size:3rem;margin-bottom:14px;display:block}
+.home-top h1{font-size:1.85rem;font-weight:700;line-height:1.22;margin-bottom:12px}
+.home-top p{color:var(--muted);font-size:.93rem;line-height:1.7;max-width:440px;margin:0 auto 26px}
+.prod-card{background:linear-gradient(135deg,#EAF2FF,#E0F6FA);border-radius:var(--r);padding:18px;border:1px solid #C5DCF8;margin-bottom:22px;display:flex;gap:14px;align-items:flex-start}
+.prod-icon{font-size:2rem;flex-shrink:0;margin-top:2px}
+.prod-name{font-weight:700;font-size:.92rem;margin-bottom:4px}
+.prod-desc{font-size:.82rem;color:var(--muted);line-height:1.55}
+.steps-row{display:flex;gap:0;margin-bottom:26px;padding:18px 0 14px;background:var(--white);border-radius:var(--r);border:1px solid var(--border);margin-bottom:22px}
+.s-item{flex:1;text-align:center;position:relative}
+.s-item:not(:last-child)::after{content:'';position:absolute;top:17px;left:50%;width:100%;height:2px;background:var(--border)}
+.s-ico{width:34px;height:34px;border-radius:50%;background:var(--acc);color:var(--p);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;margin:0 auto 7px;position:relative;z-index:1;font-family:'Sora',sans-serif}
+.s-lbl{font-size:.72rem;color:var(--muted);font-weight:500;line-height:1.35;padding:0 4px;word-break:keep-all;hyphens:none}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:22px}
+.feat{background:var(--white);border-radius:12px;padding:14px;border:1px solid var(--border)}
+.feat-ico{font-size:1.25rem;margin-bottom:7px}
+.feat-t{font-weight:600;font-size:.86rem;margin-bottom:3px}
+.feat-d{font-size:.78rem;color:var(--muted);line-height:1.4}
+
+/* TRAINING */
+.tr-wrap{max-width:640px;margin:0 auto;padding:24px 18px 80px}
+.prog-card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);padding:16px 18px;margin-bottom:18px}
+.prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+.prog-label{font-weight:600;font-size:.86rem}
+.prog-pct{font-family:'Sora',sans-serif;font-weight:700;color:var(--p)}
+.prog-track{height:9px;background:var(--border);border-radius:100px;overflow:hidden;margin-bottom:9px}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--p),var(--s));border-radius:100px;transition:width .5s ease}
+.prog-dots{display:flex;gap:5px}
+.pdot{flex:1;height:4px;border-radius:100px;background:var(--border);transition:background .3s}
+.pdot.done{background:var(--ok)}.pdot.cur{background:var(--p)}
+.prog-msg{font-size:.76rem;color:var(--muted);margin-top:7px}
+
+.block{background:var(--white);border-radius:var(--r);border:1px solid var(--border);margin-bottom:12px;overflow:hidden}
+.block-hdr{display:flex;align-items:center;gap:11px;padding:15px 16px;cursor:pointer;transition:background var(--tr)}
+.block-hdr:hover{background:var(--bg)}
+.block-num{width:30px;height:30px;border-radius:8px;background:var(--acc);color:var(--p);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0;transition:var(--tr)}
+.block-num.done{background:var(--ok);color:#fff}
+.block-title{font-weight:600;font-size:.88rem;flex:1}
+.block-badge{font-size:.72rem;color:var(--muted);background:var(--bg);padding:3px 8px;border-radius:100px;white-space:nowrap}
+.block-arr{color:var(--border);font-size:.68rem;transition:transform .25s;margin-left:2px}
+.block.open .block-arr{transform:rotate(180deg)}
+.block-body{display:none;padding:0 16px 16px;border-top:1px solid var(--border)}
+.block.open .block-body{display:block}
+
+.btext{font-size:.87rem;color:var(--muted);line-height:1.8;padding-top:13px}
+.btext strong{color:var(--text)}
+.info-strip{background:var(--acc);border-left:3px solid var(--p);border-radius:0 10px 10px 0;padding:11px 13px;margin:11px 0;font-size:.84rem;line-height:1.6}
+.fact-row{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:12px 0}
+.fact{background:var(--bg);border-radius:9px;padding:11px 13px}
+.fact-n{font-family:'Sora',sans-serif;font-weight:700;font-size:1.05rem;color:var(--p)}
+.fact-l{font-size:.73rem;color:var(--muted)}
+.ul-b{padding-left:15px;font-size:.85rem;color:var(--muted);line-height:2.1;margin-top:7px}
+.sep{height:1px;background:var(--border);margin:12px 0}
+.vid-ph{background:linear-gradient(135deg,#0a1628,#0d2b4e);border-radius:11px;padding:40px 18px;text-align:center;color:#fff;margin:12px 0}
+.vid-play{width:50px;height:50px;border-radius:50%;border:2px solid rgba(255,255,255,.4);background:rgba(255,255,255,.15);margin:0 auto 9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.vid-ph p{font-size:.78rem;opacity:.55;margin-top:5px}
+
+.audio-list{display:flex;flex-direction:column;gap:9px;margin:12px 0}
+.acard{background:var(--bg);border-radius:11px;padding:13px;border:1px solid var(--border)}
+.acard-top{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.aico{width:34px;height:34px;background:linear-gradient(135deg,var(--p),var(--s));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.88rem;flex-shrink:0}
+.aname{font-weight:600;font-size:.86rem}.atag{font-size:.72rem;color:var(--muted)}
+.adesc{font-size:.8rem;color:var(--muted);line-height:1.55;margin-bottom:7px}
+.aph{background:var(--acc);border-radius:7px;padding:8px;text-align:center;font-size:.76rem;color:var(--p)}
+audio{width:100%;border-radius:7px}
+
+.sc-list{margin-top:11px;display:flex;flex-direction:column;gap:6px}
+.sc-item{border:1px solid var(--border);border-radius:9px;overflow:hidden}
+.sc-hdr{padding:11px 13px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600;font-size:.85rem;transition:background var(--tr)}
+.sc-hdr:hover,.sc-item.open .sc-hdr{background:var(--acc);color:var(--p)}
+.sc-body{display:none;padding:11px 13px;background:var(--bg);border-top:1px solid var(--border);font-size:.83rem;color:var(--muted);line-height:1.7}
+.sc-item.open .sc-body{display:block}
+.sc-step{display:flex;gap:8px;margin-bottom:9px;padding-bottom:9px;border-bottom:1px solid var(--border)}
+.sc-step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.sc-n{width:19px;height:19px;background:var(--p);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.sc-ex{font-style:italic;background:var(--white);border-left:3px solid var(--p);padding:6px 10px;border-radius:0 7px 7px 0;margin-top:5px;font-size:.79rem;color:var(--text)}
+
+.done-btn{width:100%;padding:12px;background:var(--ok);color:#fff;border:none;border-radius:11px;font-weight:600;font-size:.87rem;cursor:pointer;transition:var(--tr);font-family:'Inter',sans-serif;margin-top:12px}
+.done-btn:hover{opacity:.88}.done-btn:disabled{background:var(--border);color:var(--muted);cursor:default}
+.finish-box{display:none;background:var(--white);border-radius:var(--r);border:1px solid var(--border);padding:28px;text-align:center;margin-top:10px}
+
+/* TEST */
+.test-wrap{max-width:640px;margin:0 auto;padding:32px 18px 80px}
+.form-box{background:var(--white);border-radius:var(--r);border:1px solid var(--border);overflow:hidden}
+.form-box iframe{width:100%;height:680px;border:none}
+.form-ph{padding:50px 28px;text-align:center;color:var(--muted)}
+.form-how{background:var(--acc);border-radius:9px;padding:11px 13px;font-size:.79rem;color:var(--p);text-align:left;margin-top:14px;max-width:340px;margin-left:auto;margin-right:auto}
+
+/* WAITING */
+.wait-wrap{max-width:500px;margin:0 auto;padding:58px 18px;text-align:center}
+.sn{display:flex;gap:11px;padding:12px 0;border-bottom:1px solid var(--border)}
+.sn:last-child{border-bottom:none}
+.sn-ico{font-size:1.05rem;flex-shrink:0;line-height:1.6}
+.sn-t{font-size:.87rem;font-weight:600}.sn-d{font-size:.79rem;color:var(--muted)}
+
+/* ADMIN LOGIN */
+.adm-pg{min-height:100vh;background:linear-gradient(135deg,#071525,#0d2645);display:flex;align-items:center;justify-content:center;padding:20px}
+.adm-box{background:var(--white);border-radius:18px;padding:36px 32px;width:100%;max-width:370px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.adm-err{background:#FEE2E2;color:#991B1B;border-radius:9px;padding:9px 13px;font-size:.82rem;margin-bottom:13px;display:none;border-left:3px solid var(--danger)}
+.adm-err.show{display:block}
+.prel{position:relative}
+.peye{position:absolute;right:11px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted)}
+
+/* ADMIN PANEL */
+.adm-wrap{max-width:880px;margin:0 auto;padding:24px 18px 80px}
+.adm-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:9px;margin-bottom:18px}
+.astat{background:var(--white);border-radius:11px;padding:13px 15px;border:1px solid var(--border)}
+.astat-n{font-family:'Sora',sans-serif;font-weight:700;font-size:1.35rem;color:var(--p)}
+.astat-l{font-size:.73rem;color:var(--muted)}
+.adm-nav{display:flex;gap:3px;background:var(--bg);border-radius:11px;padding:3px;margin-bottom:18px;flex-wrap:wrap;border:1px solid var(--border)}
+.atab{padding:8px 15px;border-radius:8px;border:none;background:transparent;cursor:pointer;font-size:.82rem;font-weight:500;color:var(--muted);font-family:'Inter',sans-serif;transition:var(--tr)}
+.atab.active{background:var(--white);color:var(--p);box-shadow:0 1px 5px rgba(0,0,0,.08)}
+.apanel{display:none}.apanel.active{display:block}
+.adm-card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);padding:18px;margin-bottom:14px}
+.adm-card h3{font-size:.88rem;font-weight:600;margin-bottom:13px;padding-bottom:11px;border-bottom:1px solid var(--border)}
+.arow{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+@media(max-width:480px){.arow{grid-template-columns:1fr}}
+
+@media(max-width:600px){
+.nav-bar{padding:0 12px;height:52px}
+.logo-name{font-size:.9rem}
+.nav-right{gap:5px}
+.lang-btn{padding:4px 9px;font-size:.74rem}
+.nav-user{display:none}
+.btn-sm{padding:7px 12px;font-size:.78rem}
+.home-wrap{padding:28px 14px 48px}
+.home-top h1{font-size:1.5rem}
+.home-top p{font-size:.88rem}
+.btn{padding:12px 18px;font-size:.88rem}
+.prod-card{flex-direction:column;gap:10px;padding:14px}
+.steps-row{padding:14px 6px 10px}
+.s-ico{width:26px;height:26px;font-size:.7rem}
+.s-lbl{font-size:.62rem}
+.s-item::after{top:13px}
+.feats{grid-template-columns:1fr 1fr;gap:8px}
+.feat{padding:11px}
+.feat-ico{font-size:1rem;margin-bottom:4px}
+.feat-t{font-size:.8rem}
+.feat-d{font-size:.72rem}
+.tr-wrap{padding:16px 12px 70px}
+.prog-card{padding:12px 13px}
+.block-hdr{padding:12px 13px;gap:8px}
+.block-num{width:27px;height:27px;font-size:.74rem}
+.block-title{font-size:.83rem}
+.block-badge{font-size:.66rem;padding:2px 7px}
+.block-body{padding:0 13px 13px}
+.btext{font-size:.83rem}
+.info-strip{font-size:.8rem;padding:9px 11px}
+.fact-row{grid-template-columns:1fr 1fr;gap:7px}
+.fact{padding:9px 10px}
+.fact-n{font-size:.92rem}
+.fact-l{font-size:.68rem}
+.done-btn{padding:13px;font-size:.85rem}
+.finish-box{padding:20px 12px}
+.acard{padding:11px}
+.aname{font-size:.82rem}
+.adesc{font-size:.77rem}
+.sc-hdr{padding:10px 11px;font-size:.81rem}
+.sc-body{padding:9px 11px}
+.test-wrap{padding:22px 12px 56px}
+.wait-wrap{padding:36px 12px}
+.mbox{padding:22px 16px;border-radius:16px}
+.mbox h2{font-size:1rem}
+.mbox p{font-size:.8rem}
+.fi{padding:12px;font-size:.87rem}
+.adm-wrap{padding:14px 11px 56px}
+.adm-stats{grid-template-columns:repeat(2,1fr);gap:7px}
+.atab{padding:7px 9px;font-size:.75rem}
+.adm-card{padding:13px}
+.adm-card h3{font-size:.83rem}
+.wa{width:46px;height:46px;bottom:14px;right:14px}
+.wa svg{width:21px;height:21px}
+.wa-tip{display:none}
+}
+.aitem{display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg);border-radius:9px;margin-bottom:7px}
+.aitem:last-child{margin-bottom:0}
+.ainfo{flex:1;min-width:0}
+.ait{font-size:.83rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aim{font-size:.73rem;color:var(--muted)}
+.ava{width:32px;height:32px;border-radius:50%;background:var(--acc);color:var(--p);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;flex-shrink:0}
+.del{background:#FEE2E2;color:var(--danger);border:none;padding:4px 10px;border-radius:6px;font-size:.74rem;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500;white-space:nowrap;transition:var(--tr)}
+.del:hover{background:#FECACA}
+.adm-badge{display:inline-flex;align-items:center;gap:5px;background:#FEF3C7;color:#92400E;padding:4px 11px;border-radius:100px;font-size:.76rem;font-weight:600}
+.adm-badge-dot{width:5px;height:5px;background:#F59E0B;border-radius:50%}
+.logout-btn{background:none;border:1.5px solid var(--border);color:var(--muted);padding:6px 13px;border-radius:9px;font-size:.8rem;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500;transition:var(--tr)}
+.logout-btn:hover{background:#FEE2E2;color:var(--danger);border-color:#FECACA}
+.root-tag{font-size:.69rem;background:#FEF3C7;color:#92400E;padding:2px 7px;border-radius:100px;font-weight:600;margin-left:5px}
+
+/* WA */
+.wa{position:fixed;bottom:20px;right:20px;width:50px;height:50px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.4);cursor:pointer;z-index:150;border:none;transition:var(--tr)}
+.wa:hover{transform:scale(1.08)}
+.wa svg{width:24px;height:24px;fill:#fff}
+.wa-tip{position:absolute;right:56px;background:#0E1B2E;color:#fff;padding:5px 9px;border-radius:7px;font-size:.74rem;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;font-family:'Inter',sans-serif}
+.wa:hover .wa-tip{opacity:1}
+
+/* TOAST */
+#toasts{position:fixed;top:66px;right:12px;z-index:300;display:flex;flex-direction:column;gap:6px}
+.toast{background:var(--white);border-radius:9px;padding:10px 15px;box-shadow:0 4px 14px rgba(0,0,0,.11);border-left:4px solid var(--p);display:flex;align-items:center;gap:7px;font-size:.82rem;font-weight:500;max-width:270px;animation:tin .22s ease;transition:opacity .22s,transform .22s}
+.toast.ok{border-color:var(--ok)}.toast.warn{border-color:var(--warn)}
+@keyframes tin{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:18px}
+.overlay.open{display:flex}
+.mbox{background:var(--white);border-radius:18px;padding:28px;width:100%;max-width:390px;box-shadow:0 18px 46px rgba(0,0,0,.14);animation:su .22s ease}
+@keyframes su{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.mbox h2{font-size:1.15rem;font-weight:700;margin-bottom:5px}
+.mbox p{font-size:.83rem;color:var(--muted);margin-bottom:18px;line-height:1.6}
+.cancel-btn{width:100%;margin-top:7px;background:none;border:none;color:var(--muted);font-size:.83rem;padding:8px;cursor:pointer;font-family:'Inter',sans-serif}
+.mt16{margin-top:16px}.ta{text-align:center}.empty{color:var(--muted);font-size:.83rem;padding:6px 0}
+</style>
+</head>
+<body>
+
+<!-- ======= HOME ======= -->
+<div class="page active" id="page-home">
+  <nav>
+    <div class="nav-bar">
+      <div class="logo" id="logo0" onclick="logoClick()">
+        <div class="logo-ico">M</div>
+        <div class="logo-name">Mental</div>
+      </div>
+      <div class="nav-right">
+        <button class="lang-btn" onclick="toggleLang()" id="lang-toggle">🇰🇿 Қазақша</button>
+        <button class="btn btn-o btn-sm" onclick="openModal()" data-i="nav_login">Войти</button>
+        <button class="btn btn-p btn-sm" onclick="openModal()" data-i="nav_start">Начать →</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="home-wrap">
+    <div class="home-top">
+      <span class="big-drop">🍄</span>
+      <h1 data-i="home_title">Стань менеджером по продажам BioSafa</h1>
+      <p data-i="home_desc">Изучи продукт, пройди обучение и тест. Лучшие кандидаты получат оффер в отдел продаж Mental!</p>
+      <button class="btn btn-p" style="font-size:.95rem;padding:14px 32px;" onclick="openModal()" data-i="home_cta">🚀 Начать обучение</button>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-icon">🍄</div>
+      <div>
+        <div class="prod-name" data-i="prod_name">BioSafa — трюфельный сок для лечения глаз</div>
+        <div class="prod-desc" data-i="prod_desc">Натуральный сок из трюфелей, который лечит глаза. Устраняет воспаление, покраснение и ухудшение зрения. Лечит, а не просто снимает симптомы — восстанавливает здоровье глаз.</div>
+      </div>
+    </div>
+
+    <div class="steps-row">
+      <div class="s-item"><div class="s-ico">1</div><div class="s-lbl" data-i="step1">Регистрация</div></div>
+      <div class="s-item"><div class="s-ico">2</div><div class="s-lbl" data-i="step2">Обучение</div></div>
+      <div class="s-item"><div class="s-ico">3</div><div class="s-lbl" data-i="step3">Аудио кейсы</div></div>
+      <div class="s-item"><div class="s-ico">4</div><div class="s-lbl" data-i="step4">Тест</div></div>
+      <div class="s-item"><div class="s-ico" style="background:#E6FFF4;color:var(--ok);">🎉</div><div class="s-lbl" data-i="step5">Оффер</div></div>
+    </div>
+
+    <div class="feats">
+      <div class="feat"><div class="feat-ico">📖</div><div class="feat-t" data-i="f1t">Теория</div><div class="feat-d" data-i="f1d">О продукте BioSafa и методах продаж</div></div>
+      <div class="feat"><div class="feat-ico">🎬</div><div class="feat-t" data-i="f2t">Видео</div><div class="feat-d" data-i="f2d">Обзор продукта и примеры работы</div></div>
+      <div class="feat"><div class="feat-ico">🎧</div><div class="feat-t" data-i="f3t">Аудио</div><div class="feat-d" data-i="f3d">Записи лучших разговоров с клиентами</div></div>
+      <div class="feat"><div class="feat-ico">📋</div><div class="feat-t" data-i="f4t">Скрипты</div><div class="feat-d" data-i="f4d">Готовые фразы для каждого этапа</div></div>
+    </div>
+
+    <button class="btn btn-p btn-full" onclick="openModal()" style="padding:14px;" data-i="home_cta2">🚀 Начать бесплатно</button>
+  </div>
+</div>
+
+<!-- ======= TRAINING ======= -->
+<div class="page" id="page-training">
+  <nav>
+    <div class="nav-prog"><div class="nav-prog-fill" id="np"></div></div>
+    <div class="nav-bar">
+      <div class="logo" onclick="showPage('home')"><div class="logo-ico">M</div><div class="logo-name">Mental</div></div>
+      <div class="nav-right">
+        <button class="lang-btn" onclick="toggleLang()" id="lang-toggle2">🇰🇿 Қазақша</button>
+        <div class="nav-user" id="nav-u">—</div>
+        <button class="btn btn-o btn-sm" onclick="showPage('test')" data-i="nav_test">Тест →</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="tr-wrap">
+    <div style="margin-bottom:18px;">
+      <h2 style="font-size:1.35rem;margin-bottom:4px;" data-i="tr_title">Обучение</h2>
+      <p style="font-size:.84rem;color:var(--muted);" data-i="tr_sub">Читай каждый блок и нажимай кнопку внизу, чтобы идти дальше</p>
+    </div>
+
+    <div class="prog-card">
+      <div class="prog-top"><span class="prog-label" data-i="prog_lbl">Твой прогресс</span><span class="prog-pct" id="pct">0%</span></div>
+      <div class="prog-track"><div class="prog-fill" id="pf" style="width:0%"></div></div>
+      <div class="prog-dots"><div class="pdot" id="pd1"></div><div class="pdot" id="pd2"></div><div class="pdot" id="pd3"></div><div class="pdot" id="pd4"></div></div>
+      <div class="prog-msg" id="pmsg"></div>
+    </div>
+
+    <!-- BLOCK 1 -->
+    <div class="block open" id="bl1">
+      <div class="block-hdr" onclick="togBlock('bl1')">
+        <div class="block-num" id="bn1">1</div>
+        <div class="block-title" data-i="b1_title">Что такое BioSafa и отдел Mental</div>
+        <div class="block-badge" data-i="b1_badge">10 мин</div>
+        <div class="block-arr">▼</div>
+      </div>
+      <div class="block-body">
+        <p class="btext" data-i="b1_text"><strong>Mental</strong> — это отдел продаж, который занимается продвижением продукта <strong>BioSafa</strong>. Наша задача — помогать людям узнавать о продукте и делать покупку.</p>
+        <div class="info-strip" data-i="b1_strip">🍄 <strong>BioSafa</strong> — натуральный трюфельный сок, который лечит глаза. В отличие от обычных капель, он не просто увлажняет — он устраняет причину проблемы: воспаление, покраснение и ухудшение зрения. Работает с первого применения.</div>
+        <div class="fact-row">
+          <div class="fact"><div class="fact-n">10 000+</div><div class="fact-l" data-i="fact1">Довольных клиентов</div></div>
+          <div class="fact"><div class="fact-n">4.9 ⭐</div><div class="fact-l" data-i="fact2">Средний рейтинг</div></div>
+          <div class="fact"><div class="fact-n">74%</div><div class="fact-l" data-i="fact3">Повторных покупок</div></div>
+          <div class="fact"><div class="fact-n">100%</div><div class="fact-l" data-i="fact4">Натуральный состав</div></div>
+        </div>
+        <div class="sep"></div>
+        <strong style="font-size:.86rem;" data-i="b1_role">Твоя роль в Mental:</strong>
+        <ul class="ul-b" id="b1_ul">
+          <li data-i="b1_li1">Консультируешь покупателей онлайн о продукте BioSafa</li>
+          <li data-i="b1_li2">Обрабатываешь заявки из рекламы и соцсетей</li>
+          <li data-i="b1_li3">Помогаешь клиенту понять пользу и оформить заказ</li>
+          <li data-i="b1_li4">Отвечаешь на вопросы о составе и применении</li>
+        </ul>
+        <button class="done-btn" id="db1" onclick="doneBl(1)" data-i="done1">✓ Прочитал — продолжить</button>
+      </div>
+    </div>
+
+    <!-- BLOCK 2 -->
+    <div class="block" id="bl2">
+      <div class="block-hdr" onclick="togBlock('bl2')">
+        <div class="block-num" id="bn2">2</div>
+        <div class="block-title" data-i="b2_title">Видео и свойства продукта</div>
+        <div class="block-badge" data-i="b2_badge">15 мин</div>
+        <div class="block-arr">▼</div>
+      </div>
+      <div class="block-body">
+        <p class="btext" data-i="b2_text">Посмотри видео о BioSafa — откуда берётся трюфельный сок, как он лечит глаза и чем отличается от обычных глазных капель.</p>
+        <div class="vid-ph">
+          <div class="vid-play">▶</div>
+          <div style="font-size:.88rem;font-weight:600;" data-i="vid_title">Видео о BioSafa</div>
+          <p data-i="vid_hint">Вставь YouTube ссылку в &lt;iframe src="..."&gt;</p>
+        </div>
+        <div class="sep"></div>
+        <strong style="font-size:.86rem;" data-i="b2_facts">Ключевые свойства BioSafa:</strong>
+        <div class="fact-row">
+          <div class="fact"><div style="font-size:.72rem;color:var(--p);font-weight:600;margin-bottom:3px;">🍄 <span data-i="fp1h">Основа</span></div><div style="font-size:.79rem;color:var(--muted);" data-i="fp1d">Натуральный сок трюфеля — редкий лечебный гриб</div></div>
+          <div class="fact"><div style="font-size:.72rem;color:var(--p);font-weight:600;margin-bottom:3px;">👁 <span data-i="fp2h">Лечение</span></div><div style="font-size:.79rem;color:var(--muted);" data-i="fp2d">Убирает воспаление, покраснение и усталость глаз</div></div>
+          <div class="fact"><div style="font-size:.72rem;color:var(--p);font-weight:600;margin-bottom:3px;">⚡ <span data-i="fp3h">Скорость</span></div><div style="font-size:.79rem;color:var(--muted);" data-i="fp3d">Заметный эффект уже через 5–10 минут после применения</div></div>
+          <div class="fact"><div style="font-size:.72rem;color:var(--p);font-weight:600;margin-bottom:3px;">🌿 <span data-i="fp4h">Состав</span></div><div style="font-size:.79rem;color:var(--muted);" data-i="fp4d">Без химии и консервантов, подходит для ежедневного применения</div></div>
+        </div>
+        <button class="done-btn" id="db2" onclick="doneBl(2)" data-i="done2">✓ Изучил — продолжить</button>
+      </div>
+    </div>
+
+    <!-- BLOCK 3 -->
+    <div class="block" id="bl3">
+      <div class="block-hdr" onclick="togBlock('bl3')">
+        <div class="block-num" id="bn3">3</div>
+        <div class="block-title" data-i="b3_title">Аудио успешных продаж</div>
+        <div class="block-badge">🎧 3</div>
+        <div class="block-arr">▼</div>
+      </div>
+      <div class="block-body">
+        <p class="btext" data-i="b3_text">Слушай реальные звонки менеджеров Mental. Обращай внимание: как объясняют лечебное действие трюфельного сока и снимают возражения.</p>
+        <div class="audio-list" id="audio-list"></div>
+        <button class="done-btn" id="db3" onclick="doneBl(3)" data-i="done3">✓ Прослушал — продолжить</button>
+      </div>
+    </div>
+
+    <!-- BLOCK 4 -->
+    <div class="block" id="bl4">
+      <div class="block-hdr" onclick="togBlock('bl4')">
+        <div class="block-num" id="bn4">4</div>
+        <div class="block-title" data-i="b4_title">Скрипты продаж BioSafa</div>
+        <div class="block-badge">📋 5</div>
+        <div class="block-arr">▼</div>
+      </div>
+      <div class="block-body">
+        <p class="btext" data-i="b4_text">Изучи скрипты для каждого этапа разговора с покупателем. Запомни ключевые фразы — они помогут в реальных диалогах.</p>
+        <div class="sc-list" id="sc-list"></div>
+        <button class="done-btn" id="db4" onclick="doneBl(4)" data-i="done4">✓ Изучил — перейти к тесту</button>
+      </div>
+    </div>
+
+    <div class="finish-box" id="finish-box">
+      <div style="font-size:2.6rem;margin-bottom:10px;">🏆</div>
+      <h3 style="font-size:1.15rem;margin-bottom:7px;" data-i="finish_t">Отлично! Всё пройдено</h3>
+      <p style="color:var(--muted);font-size:.86rem;margin-bottom:20px;" data-i="finish_d">Теперь пройди тест — займёт около 10 минут</p>
+      <button class="btn btn-p" onclick="showPage('test')" style="padding:12px 28px;" data-i="finish_btn">📝 Перейти к тесту</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======= TEST ======= -->
+<div class="page" id="page-test">
+  <nav>
+    <div class="nav-prog"><div class="nav-prog-fill" style="width:100%"></div></div>
+    <div class="nav-bar">
+      <div class="logo" onclick="showPage('home')"><div class="logo-ico">M</div><div class="logo-name">Mental</div></div>
+      <div class="nav-right">
+        <button class="lang-btn" onclick="toggleLang()" id="lang-toggle3">🇰🇿 Қазақша</button>
+        <div class="nav-user" id="nav-u2">—</div>
+        <button class="btn btn-o btn-sm" onclick="showPage('training')" data-i="back_btn">← Назад</button>
+      </div>
+    </div>
+  </nav>
+  <div class="test-wrap">
+    <div style="max-width:480px;margin:0 auto;text-align:center;padding-top:40px;">
+      <div style="font-size:3rem;margin-bottom:18px;">🏆</div>
+      <h2 style="font-size:1.5rem;margin-bottom:10px;" data-i="test_title">Обучение завершено!</h2>
+      <p style="color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:28px;" data-i="test_sub">Ты прошёл все 4 блока обучения. Нажми кнопку ниже — мы свяжемся с тобой в ближайшее время.</p>
+      <button class="btn btn-p btn-full" onclick="showPage('waiting')" style="padding:14px;font-size:.95rem;" data-i="test_done">✅ Завершить обучение</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======= WAITING ======= -->
+<div class="page" id="page-waiting">
+  <nav><div class="nav-bar">
+    <div class="logo" onclick="showPage('home')"><div class="logo-ico">M</div><div class="logo-name">Mental</div></div>
+    <div class="nav-right"><button class="lang-btn" onclick="toggleLang()" id="lang-toggle4">🇰🇿 Қазақша</button></div>
+  </div></nav>
+  <div class="wait-wrap">
+    <div style="font-size:3.2rem;margin-bottom:16px;">🎊</div>
+    <h2 style="font-size:1.7rem;margin-bottom:10px;" data-i="wait_title">Спасибо!</h2>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:4px;" data-i="wait_desc">Мы получили твои ответы. Свяжемся в течение <strong>1–2 рабочих дней</strong> — проверяй почту и WhatsApp.</p>
+    <div class="card mt16" style="text-align:left;">
+      <div style="font-weight:600;font-size:.86rem;margin-bottom:10px;" data-i="next_title">Что дальше?</div>
+      <div class="sn"><div class="sn-ico">📧</div><div><div class="sn-t" data-i="ns1t">Письмо на почту</div><div class="sn-d" data-i="ns1d">Подтверждение придёт в течение нескольких минут</div></div></div>
+      <div class="sn"><div class="sn-ico">📞</div><div><div class="sn-t" data-i="ns2t">Звонок рекрутера</div><div class="sn-d" data-i="ns2d">Знакомство по телефону — 10–15 минут</div></div></div>
+      <div class="sn"><div class="sn-ico">🤝</div><div><div class="sn-t" data-i="ns3t">Интервью с командой</div><div class="sn-d" data-i="ns3d">Онлайн или офлайн встреча с руководителем</div></div></div>
+    </div>
+    <button class="btn btn-o mt16" onclick="showPage('home')" data-i="back_home">← На главную</button>
+  </div>
+</div>
+
+<!-- ======= ADMIN LOGIN ======= -->
+<div class="page" id="page-admin-login">
+  <div class="adm-pg">
+    <div class="adm-box">
+      <div class="ta" style="margin-bottom:22px;">
+        <div style="font-size:1.9rem;margin-bottom:9px;">🔐</div>
+        <h2 style="font-size:1.2rem;">Mental — Панель управления</h2>
+        <p style="font-size:.8rem;color:var(--muted);margin-top:4px;">Только для сотрудников отдела Mental</p>
+      </div>
+      <div class="adm-err" id="adm-err">Неверный логин или пароль</div>
+      <div class="fg"><label class="fl">Логин</label><input class="fi" id="ali" placeholder="Введите логин" autocomplete="username"/></div>
+      <div class="fg">
+        <label class="fl">Пароль</label>
+        <div class="prel"><input class="fi" id="api" type="password" placeholder="••••••••" autocomplete="current-password" style="padding-right:40px;"/><button class="peye" onclick="togglePass()">👁</button></div>
+      </div>
+      <button class="btn btn-p btn-full" onclick="doAdminLogin()">Войти</button>
+      <button onclick="showPage('home')" class="cancel-btn">← Вернуться на сайт</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======= ADMIN PANEL ======= -->
+<div class="page" id="page-admin">
+  <nav><div class="nav-bar">
+    <div class="logo"><div class="logo-ico">M</div><div class="logo-name">Mental</div></div>
+    <div class="nav-right">
+      <div class="adm-badge"><div class="adm-badge-dot"></div>Администратор</div>
+      <button class="logout-btn" onclick="adminLogout()">Выйти</button>
+    </div>
+  </div></nav>
+
+  <div class="adm-wrap">
+    <div style="margin-bottom:16px;">
+      <h2 style="font-size:1.3rem;">Панель управления</h2>
+      <p style="font-size:.82rem;color:var(--muted);margin-top:3px;">Mental · BioSafa</p>
+    </div>
+    <div class="adm-stats" id="adm-stats"></div>
+    <div class="adm-nav">
+      <button class="atab active" onclick="aTab('audio')">🎧 Аудио</button>
+      <button class="atab" onclick="aTab('mats')">📖 Материалы</button>
+      <button class="atab" onclick="aTab('scripts')">📋 Скрипты</button>
+      <button class="atab" onclick="aTab('cands')">👥 Кандидаты</button>
+      <button class="atab" onclick="aTab('accs')">🔑 Аккаунты</button>
+    </div>
+
+    <div class="apanel active" id="ap-audio">
+      <div class="adm-card"><h3>➕ Добавить аудио</h3>
+        <div class="arow">
+          <div class="fg"><label class="fl">Название</label><input class="fi" id="an" placeholder="Звонок №4"/></div>
+          <div class="fg"><label class="fl">Тег</label><input class="fi" id="at" placeholder="Тип звонка"/></div>
+        </div>
+        <div class="fg"><label class="fl">Описание</label><input class="fi" id="ad" placeholder="Краткое описание"/></div>
+        <div class="fg"><label class="fl">URL аудио</label><input class="fi" id="au" placeholder="https://..."/></div>
+        <button class="btn btn-p btn-sm" onclick="addAudio()">+ Добавить</button>
+      </div>
+      <div class="adm-card mt16"><h3>Аудио <span id="ac" style="color:var(--muted);font-weight:400;"></span></h3><div id="aal"></div></div>
+    </div>
+
+    <div class="apanel" id="ap-mats">
+      <div class="adm-card"><h3>➕ Добавить материал</h3>
+        <div class="fg"><label class="fl">Заголовок</label><input class="fi" id="mtt" placeholder="Название"/></div>
+        <div class="fg"><label class="fl">Текст</label><textarea class="fi" id="mb" rows="4" placeholder="Содержание..."></textarea></div>
+        <button class="btn btn-p btn-sm" onclick="addMat()">+ Добавить</button>
+      </div>
+      <div class="adm-card mt16"><h3>Материалы</h3><div id="aml"></div></div>
+    </div>
+
+    <div class="apanel" id="ap-scripts">
+      <div class="adm-card"><h3>➕ Добавить скрипт</h3>
+        <div class="fg"><label class="fl">Этап</label><input class="fi" id="sct" placeholder="Закрытие на покупку"/></div>
+        <div class="fg"><label class="fl">Фразы</label><textarea class="fi" id="scb" rows="4" placeholder="Ключевые фразы..."></textarea></div>
+        <button class="btn btn-p btn-sm" onclick="addScript()">+ Добавить</button>
+      </div>
+      <div class="adm-card mt16"><h3>Скрипты <span id="scc" style="color:var(--muted);font-weight:400;"></span></h3><div id="asl"></div></div>
+    </div>
+
+    <div class="apanel" id="ap-cands">
+      <div class="adm-card"><h3>Кандидаты <span id="cc" style="color:var(--muted);font-weight:400;"></span></h3><div id="acl"></div></div>
+    </div>
+
+    <div class="apanel" id="ap-accs">
+      <div class="adm-card"><h3>➕ Добавить администратора</h3>
+        <div class="arow">
+          <div class="fg"><label class="fl">Логин</label><input class="fi" id="xl" placeholder="manager1"/></div>
+          <div class="fg"><label class="fl">Пароль</label><input class="fi" id="xp" type="password" placeholder="••••••••"/></div>
+        </div>
+        <div class="fg"><label class="fl">Имя</label><input class="fi" id="xn" placeholder="Алия Нурова"/></div>
+        <button class="btn btn-p btn-sm" onclick="addAcc()">+ Создать аккаунт</button>
+      </div>
+      <div class="adm-card mt16"><h3>Администраторы <span id="xc" style="color:var(--muted);font-weight:400;"></span></h3><div id="axl"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="reg-overlay">
+  <div class="mbox">
+    <h2 data-i="modal_title">🍄 Начать обучение</h2>
+    <p data-i="modal_sub">Введи своё имя и номер телефона, чтобы начать</p>
+    <div class="fg"><label class="fl" data-i="lbl_name">Имя *</label><input class="fi" id="rn" placeholder=""/></div>
+    <div class="fg"><label class="fl" data-i="lbl_phone">Телефон / WhatsApp *</label><input class="fi" id="rp" type="tel" placeholder="+7 (777) 123-45-67"/></div>
+    <button class="btn btn-p btn-full" onclick="doReg()" data-i="modal_btn">Начать обучение 🚀</button>
+    <button class="cancel-btn" onclick="closeModal()" data-i="cancel_btn">Отмена</button>
+  </div>
+</div>
+
+<button class="wa" onclick="openWA()">
+  <div class="wa-tip" data-i="wa_tip">Написать в WhatsApp</div>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</button>
+<div id="toasts"></div>
+
+<script>
+// ═══════════════════════════════
+//  ⚠️  ИЗМЕНИ ПЕРЕД ЗАПУСКОМ
+// ═══════════════════════════════
+const ROOT_LOGIN = 'mental_admin';
+const ROOT_PASS  = 'biosafa2024';
+// ═══════════════════════════════
+
+// ── TRANSLATIONS ──
+const T = {
+  ru: {
+    nav_login:'Войти', nav_start:'Начать →', nav_test:'Тест →', back_btn:'← Назад', back_home:'← На главную',
+    lang_btn:'🇰🇿 Қазақша',
+    home_title:'Стань менеджером по продажам BioSafa',
+    home_desc:'Изучи продукт, пройди обучение и тест. Лучшие кандидаты получат оффер в отдел продаж Mental!',
+    home_cta:'🚀 Начать обучение', home_cta2:'🚀 Начать бесплатно',
+    prod_name:'BioSafa — трюфельный сок для лечения глаз',
+    prod_desc:'Натуральный сок из трюфелей, который лечит глаза. Устраняет воспаление, покраснение и ухудшение зрения. Лечит, а не просто снимает симптомы — восстанавливает здоровье глаз.',
+    step1:'Регистрация', step2:'Обучение', step3:'Аудио кейсы', step4:'Тест', step5:'Оффер',
+    f1t:'Теория', f1d:'О продукте BioSafa и методах продаж',
+    f2t:'Видео', f2d:'Обзор продукта и примеры работы',
+    f3t:'Аудио', f3d:'Записи лучших разговоров с клиентами',
+    f4t:'Скрипты', f4d:'Готовые фразы для каждого этапа',
+    tr_title:'Обучение', tr_sub:'Читай каждый блок и нажимай кнопку внизу, чтобы идти дальше',
+    prog_lbl:'Твой прогресс',
+    prog_msgs:['👇 Начни с первого блока','✅ Блок 1 пройден!','✅ Блок 2 пройден!','✅ Блок 3 пройден!','🏆 Всё пройдено — иди на тест!'],
+    b1_title:'Что такое BioSafa и отдел Mental', b1_badge:'10 мин',
+    b1_text:'<strong>Mental</strong> — это отдел продаж, который занимается продвижением продукта <strong>BioSafa</strong>. Наша задача — помогать людям узнавать о продукте и делать покупку.',
+    b1_strip:'🍄 <strong>BioSafa</strong> — натуральный трюфельный сок, который лечит глаза. В отличие от обычных капель, он не просто увлажняет — он устраняет причину проблемы: воспаление, покраснение и ухудшение зрения. Работает с первого применения.',
+    fact1:'Довольных клиентов', fact2:'Средний рейтинг', fact3:'Повторных покупок', fact4:'Натуральный состав',
+    b1_role:'Твоя роль в Mental:',
+    b1_li1:'Консультируешь покупателей онлайн о продукте BioSafa',
+    b1_li2:'Обрабатываешь заявки из рекламы и соцсетей',
+    b1_li3:'Помогаешь клиенту понять пользу и оформить заказ',
+    b1_li4:'Отвечаешь на вопросы о составе и применении',
+    done1:'✓ Прочитал — продолжить',
+    b2_title:'Видео и свойства продукта', b2_badge:'15 мин',
+    b2_text:'Посмотри видео о BioSafa — откуда берётся трюфельный сок, как он лечит глаза и чем отличается от обычных глазных капель.',
+    vid_title:'Видео о BioSafa', vid_hint:'Вставь YouTube ссылку в <iframe src="...">',
+    b2_facts:'Ключевые свойства BioSafa:',
+    fp1h:'Основа', fp1d:'Натуральный сок трюфеля — редкий лечебный гриб',
+    fp2h:'Лечение', fp2d:'Убирает воспаление, покраснение и усталость глаз',
+    fp3h:'Скорость', fp3d:'Заметный эффект уже через 5–10 минут после применения',
+    fp4h:'Состав', fp4d:'Без химии и консервантов, подходит для ежедневного применения',
+    done2:'✓ Изучил — продолжить',
+    b3_title:'Аудио успешных продаж',
+    b3_text:'Слушай реальные звонки менеджеров Mental. Обращай внимание: как объясняют лечебное действие трюфельного сока и снимают возражения.',
+    done3:'✓ Прослушал — продолжить',
+    b4_title:'Скрипты продаж BioSafa',
+    b4_text:'Изучи скрипты для каждого этапа разговора с покупателем. Запомни ключевые фразы — они помогут в реальных диалогах.',
+    done4:'✓ Изучил — перейти к тесту',
+    finish_t:'Отлично! Всё пройдено', finish_d:'Теперь пройди тест — займёт около 10 минут', finish_btn:'📝 Перейти к тесту',
+    test_title:'Обучение завершено!', test_sub:'Ты прошёл все 4 блока. Нажми кнопку — мы свяжемся с тобой в ближайшее время.',
+    form_title:'', form_hint:'', form_how:'',
+    test_done:'✅ Завершить обучение',
+    wait_title:'Спасибо!', wait_desc:'Мы получили твои ответы. Свяжемся в течение <strong>1–2 рабочих дней</strong> — проверяй почту и WhatsApp.',
+    next_title:'Что дальше?',
+    ns1t:'Письмо на почту', ns1d:'Подтверждение придёт в течение нескольких минут',
+    ns2t:'Звонок рекрутера', ns2d:'Знакомство по телефону — 10–15 минут',
+    ns3t:'Интервью с командой', ns3d:'Онлайн или офлайн встреча с руководителем',
+    modal_title:'🍄 Начать обучение', modal_sub:'Введи своё имя и номер телефона, чтобы начать',
+    lbl_name:'Имя *', lbl_phone:'Телефон / WhatsApp *',
+    modal_btn:'Начать обучение 🚀', cancel_btn:'Отмена',
+    wa_tip:'Написать в WhatsApp',
+    toast_welcome:'Добро пожаловать,', toast_back:'С возвращением,',
+    toast_p25:'🎯 Первый блок пройден!', toast_p50:'🔥 Половина позади!', toast_p75:'💪 Почти готово!', toast_p100:'🏆 Всё пройдено — переходи к тесту!',
+    audio_ph:'📎 Аудио добавляется через панель администратора',
+    audio_titles:['Звонок №1','Звонок №2','Лучший звонок'],
+    audio_tags:['Первый контакт','Возражение «уже капаю»','Закрытие на покупку'],
+    audio_descs:[
+      'Клиент позвонил после рекламы. Как объяснить лечебный эффект трюфельного сока BioSafa и выявить проблему клиента.',
+      'Менеджер объясняет разницу: обычные капли просто увлажняют, а BioSafa лечит. Мягко, без давления.',
+      'От первого вопроса о составе до оформления заказа за 8 минут. Эталонная работа.'
+    ],
+    sc_titles:['1. Открытие разговора','2. Выявление проблемы','3. Презентация BioSafa','4. Работа с возражениями','5. Закрытие на покупку'],
+    sc_descs:[
+      'Цель: расположить клиента и узнать его проблему.',
+      'Цель: понять, что именно болит у клиента.',
+      'Цель: объяснить, почему BioSafa лечит, а не просто снимает симптомы.',
+      'Цель: снять сомнения спокойно и уверенно.',
+      'Цель: оформить заказ или договориться о следующем шаге.',
+    ],
+    sc_steps:[
+      [{t:'Представься и уточни заявку',ex:'«Добрый день! Это Mental, меня зовут [Имя]. Вы оставляли заявку на BioSafa?»'},{t:'Дай ответить, не перебивай',ex:null},{t:'Спроси о проблеме',ex:'«Расскажите, что беспокоит — покраснение, усталость, ухудшение зрения?»'}],
+      [{t:'Уточни симптомы',ex:'«Как давно это? Связано с работой за компьютером?»'},{t:'Спроси про опыт',ex:'«Пробовали другие средства? Что не помогло?»'},{t:'Узнай цель',ex:'«Хотите убрать симптомы быстро или вылечить насовсем?»'}],
+      [{t:'Свяжи с проблемой клиента',ex:'«Вы говорите, глаза краснеют — BioSafa устраняет воспаление на уровне клеток, а не маскирует»'},{t:'Объясни уникальность',ex:'«Это не обычные капли — это трюфельный сок. Трюфель веками использовался для лечения глаз»'},{t:'Натуральный состав',ex:'«Без химии и консервантов. Можно применять каждый день»'},{t:'Быстрый результат',ex:'«Многие замечают улучшение уже через 5–10 минут с первого применения»'}],
+      [{t:'«Уже капаю другие капли»',ex:'«Обычные капли просто увлажняют. BioSafa именно лечит — убирает причину, а не симптом»'},{t:'«Дорого»',ex:'«Один курс BioSafa — это полноценное лечение. Намного дешевле визита к врачу и процедур»'},{t:'«Хочу подумать»',ex:'«Конечно! Отправлю состав и отзывы в WhatsApp — решишь в удобное время»'}],
+      [{t:'Резюмируй',ex:'«Итак, вам подойдёт BioSafa — начать с одного курса. Правильно?»'},{t:'Предложи оформить',ex:'«Оформляю прямо сейчас — доставка 1–3 дня»'},{t:'Если откладывает',ex:'«Тогда напишу в WhatsApp завтра — договорились?»'}],
+    ],
+  },
+  kz: {
+    nav_login:'Кіру', nav_start:'Бастау →', nav_test:'Тест →', back_btn:'← Артқа', back_home:'← Басты бетке',
+    lang_btn:'🇷🇺 Русский',
+    home_title:'BioSafa сату менеджері бол',
+    home_desc:'Өнімді үйрен, оқудан өт және тест тапсыр. Үздік үміткерлер Mental сату бөліміне оффер алады!',
+    home_cta:'🚀 Оқуды бастау', home_cta2:'🚀 Тегін бастау',
+    prod_name:'BioSafa — көздерді емдейтін трюфель шырыны',
+    prod_desc:'Трюфельден алынған табиғи шырын. Көздің қабынуын, қызаруын және нашарлауын жояды. Белгілерді жасырмайды — денсаулықты қалпына келтіреді.',
+    step1:'Тіркелу', step2:'Оқу', step3:'Аудио', step4:'Тест', step5:'Оффер',
+    f1t:'Теория', f1d:'BioSafa өнімі және сату тәсілдері туралы',
+    f2t:'Бейне', f2d:'Өнімге шолу және жұмыс мысалдары',
+    f3t:'Аудио', f3d:'Клиенттермен үздік сөйлесулер жазбасы',
+    f4t:'Сценарийлер', f4d:'Әр кезеңге арналған дайын сөз тіркестері',
+    tr_title:'Оқу', tr_sub:'Әр блокты оқы және алға жылжу үшін төмендегі батырманы бас',
+    prog_lbl:'Прогресс',
+    prog_msgs:['👇 Бірінші блоктан бастаңыз','✅ 1-блок аяқталды!','✅ 2-блок аяқталды!','✅ 3-блок аяқталды!','🏆 Бәрі аяқталды — тестке бар!'],
+    b1_title:'BioSafa және Mental бөлімі дегеніміз не', b1_badge:'10 мин',
+    b1_text:'<strong>Mental</strong> — <strong>BioSafa</strong> өнімін жылжытатын сату бөлімі. Біздің міндетіміз — адамдарға өнімді таныстыру және сатып алуға көмектесу.',
+    b1_strip:'🍄 <strong>BioSafa</strong> — көздерді емдейтін табиғи трюфель шырыны. Қарапайым тамшылардан айырмашылығы — ол тек ылғалдандырмайды, мәселенің себебін жояды: қабыну, қызару және көру нашарлауы. Бірінші қолданудан бастап жұмыс істейді.',
+    fact1:'Қанағаттанған клиент', fact2:'Орташа рейтинг', fact3:'Қайталама сатып алу', fact4:'Табиғи құрам',
+    b1_role:'Mental бөліміндегі рөлің:',
+    b1_li1:'BioSafa өнімі туралы клиенттерге онлайн кеңес береcің',
+    b1_li2:'Жарнамадан және әлеуметтік желіден келген өтінімдерді өңдейсің',
+    b1_li3:'Клиентке пайдасын түсінуге және тапсырыс беруге көмектесесің',
+    b1_li4:'Құрамы мен қолдану туралы сұрақтарға жауап бересің',
+    done1:'✓ Оқыдым — жалғастыру',
+    b2_title:'Бейне және өнім қасиеттері', b2_badge:'15 мин',
+    b2_text:'BioSafa туралы бейнені қара — трюфель шырыны қалай алынады, ол көзді қалай емдейді және қарапайым тамшылардан қандай айырмашылығы бар.',
+    vid_title:'BioSafa туралы бейне', vid_hint:'YouTube сілтемесін <iframe src="..."> ішіне кір',
+    b2_facts:'BioSafa-ның негізгі қасиеттері:',
+    fp1h:'Негізі', fp1d:'Трюфель шырыны — сирек кездесетін емдік саңырауқұлақ',
+    fp2h:'Емдеу', fp2d:'Көздің қабынуын, қызаруын және шаршауын жояды',
+    fp3h:'Жылдамдық', fp3d:'Байқалатын нәтиже қолданғаннан кейін 5–10 минут ішінде',
+    fp4h:'Құрамы', fp4d:'Химиясыз және консервантсыз, күнделікті қолдануға жарайды',
+    done2:'✓ Үйрендім — жалғастыру',
+    b3_title:'Үздік сатылымдардың аудиосы',
+    b3_text:'Mental менеджерлерінің нақты қоңырауларын тыңда. Трюфель шырынының емдік әсерін қалай түсіндіретінін және қарсылықтарды қалай алатынын байқа.',
+    done3:'✓ Тыңдадым — жалғастыру',
+    b4_title:'BioSafa сату сценарийлері',
+    b4_text:'Сатып алушымен сөйлесудің әр кезеңіне арналған сценарийлерді үйрен. Негізгі сөз тіркестерін есте сақта — олар нақты диалогтарда көмектеседі.',
+    done4:'✓ Үйрендім — тестке өту',
+    finish_t:'Тамаша! Бәрі аяқталды', finish_d:'Енді тест тапсыр — шамамен 10 минут', finish_btn:'📝 Тестке өту',
+    test_title:'Оқу аяқталды!', test_sub:'Сен 4 блоктың бәрін өттің. Батырманы бас — жақын арада хабарласамыз.',
+    form_title:'', form_hint:'', form_how:'',
+    test_done:'✅ Оқуды аяқтау',
+    wait_title:'Рахмет!', wait_desc:'Біз жауаптарыңды алдық. <strong>1–2 жұмыс күні</strong> ішінде хабарласамыз — поштаңды және WhatsApp-ты тексер.',
+    next_title:'Бұдан кейін не?',
+    ns1t:'Поштаға хат', ns1d:'Бірнеше минут ішінде растау келеді',
+    ns2t:'Рекрутердің қоңырауы', ns2d:'Телефон арқылы таныстырылым — 10–15 минут',
+    ns3t:'Командамен интервью', ns3d:'Жетекшімен онлайн немесе офлайн кездесу',
+    modal_title:'🍄 Оқуды бастау', modal_sub:'Аты-жөніңді және телефон нөміріңді енгіз',
+    lbl_name:'Аты-жөні *', lbl_phone:'Телефон / WhatsApp *',
+    modal_btn:'Оқуды бастау 🚀', cancel_btn:'Болдырмау',
+    wa_tip:'WhatsApp-қа жазу',
+    toast_welcome:'Қош келдіңіз,', toast_back:'Қайта оралдыңыз,',
+    toast_p25:'🎯 Бірінші блок аяқталды!', toast_p50:'🔥 Жартысы өтті!', toast_p75:'💪 Аздап қалды!', toast_p100:'🏆 Бәрі аяқталды — тестке бар!',
+    audio_ph:'📎 Аудио әкімші панелі арқылы қосылады',
+    audio_titles:['Қоңырау №1','Қоңырау №2','Үздік қоңырау'],
+    audio_tags:['Бірінші байланыс','«Басқа тамшы қолданамын» қарсылығы','Сатып алуға жабу'],
+    audio_descs:[
+      'Клиент жарнамадан кейін қоңырау шалды. BioSafa трюфель шырынының емдік әсерін қалай түсіндіру және мәселені анықтау.',
+      'Менеджер айырмашылықты түсіндіреді: қарапайым тамшылар тек ылғалдандырады, ал BioSafa емдейді. Жұмсақ, қысымсыз.',
+      'Құрам туралы алғашқы сұрақтан тапсырыс беруге дейін 8 минут ішінде. Үлгілі жұмыс.'
+    ],
+    sc_titles:['1. Сөйлесуді ашу','2. Мәселені анықтау','3. BioSafa презентациясы','4. Қарсылықпен жұмыс','5. Сатып алуға жабу'],
+    sc_descs:[
+      'Мақсат: клиентті баурап алу және мәселесін білу.',
+      'Мақсат: клиенттің нені ауыратынын нақты түсіну.',
+      'Мақсат: BioSafa-ның неліктен емдейтінін, тек белгілерді жасырмайтынын түсіндіру.',
+      'Мақсат: күмәнді тыныш және сенімді жою.',
+      'Мақсат: тапсырысты рәсімдеу немесе келесі қадамды келісу.',
+    ],
+    sc_steps:[
+      [{t:'Өзіңді таныстыр және өтінімді нақтыла',ex:'«Сәлем! Бұл Mental, менің атым [Есім]. Сіз BioSafa-ға өтінім қалдырдыңыз ба?»'},{t:'Жауап берейін деп кесіп алма',ex:null},{t:'Мәселе туралы сұра',ex:'«Айтыңызшы, не мазалайды — қызару, шаршау, нашар көру?»'}],
+      [{t:'Симптомдарды нақтыла',ex:'«Бұл қашаннан бері? Компьютермен жұмыспен байланысты ма?»'},{t:'Тәжірибе туралы сұра',ex:'«Басқа тамшылар сынап көрдіңіз бе? Не көмектеспеді?»'},{t:'Мақсатты біл',ex:'«Белгілерді тез жою керек пе, әлде толық емдегіңіз келе ме?»'}],
+      [{t:'Клиент мәселесімен байланыстыр',ex:'«Сіз көздің қызаратынын айттыңыз — BioSafa қабынуды жасырмай, жасуша деңгейінде жояды»'},{t:'Ерекшелігін түсіндір',ex:'«Бұл қарапайым тамшы емес — трюфель шырыны. Трюфель ғасырлар бойы көздің ауруларын емдеуге қолданылды»'},{t:'Табиғи құрам',ex:'«Химиясыз және консервантсыз. Күн сайын қолдануға болады»'},{t:'Жылдам нәтиже',ex:'«Көпшілігі бірінші қолданудан кейін 5–10 минут ішінде жақсарғанын байқайды»'}],
+      [{t:'«Басқа тамшы тамызамын»',ex:'«Қарапайым тамшылар тек ылғалдандырады. BioSafa емдейді — белгіні емес, себепті жояды»'},{t:'«Қымбат»',ex:'«BioSafa-ның бір курсы — бұл толыққанды емдеу. Дәрігерге барудан және процедурадан әлдеқайда арзан»'},{t:'«Ойланайын»',ex:'«Әрине! Құрамын және пікірлерін WhatsApp-қа жіберемін — ыңғайлы уақытта шешесің»'}],
+      [{t:'Қорыт',ex:'«Яғни, сізге BioSafa-ның бір курсы қолайлы. Дұрыс па?»'},{t:'Тапсырыс беруді ұсын',ex:'«Қазір рәсімдейін — жеткізу 1–3 күн»'},{t:'Кейінге қалдырса',ex:'«Онда ертең WhatsApp-қа жазамын — келістік пе?»'}],
+    ],
+  }
+};
+
+let lang = localStorage.getItem('mn_lang') || 'ru';
+
+function t(key){ return T[lang][key] || T['ru'][key] || key; }
+
+function applyLang(){
+  // Update all data-i elements
+  document.querySelectorAll('[data-i]').forEach(el=>{
+    const key = el.getAttribute('data-i');
+    const val = t(key);
+    if(val !== undefined) el.innerHTML = val;
+  });
+  // lang buttons
+  ['lang-toggle','lang-toggle2','lang-toggle3','lang-toggle4'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.innerHTML=t('lang_btn');
+  });
+  // progress msg
+  updateProg();
+  // re-render dynamic content
+  renderAudios();
+  renderScripts();
+}
+
+function toggleLang(){
+  lang = lang==='ru' ? 'kz' : 'ru';
+  localStorage.setItem('mn_lang', lang);
+  applyLang();
+  toast(lang==='kz' ? '🇰🇿 Қазақ тіліне ауыстырылды' : '🇷🇺 Переключено на русский', 'ok');
+}
+
+// ── ADMIN AUTH ──
+const LS={get:k=>{try{return JSON.parse(localStorage.getItem(k))}catch{return null}},set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))};
+let ACCS=LS.get('mn_accs')||[];
+const S={
+  user:LS.get('mn_user'),
+  prog:LS.get('mn_prog')||[false,false,false,false],
+  audios:LS.get('mn_audios'),
+  scripts:LS.get('mn_scripts'),
+  mats:LS.get('mn_mats')||[],
+  cands:LS.get('mn_cands')||[],
+  admAuth:LS.get('mn_adm')||false,
+  admName:LS.get('mn_admname')||'Admin',
+};
+
+// Build default audios/scripts from translation
+function buildDefaults(){
+  const L=T.ru;
+  S.audios=L.audio_titles.map((tt,i)=>({id:i+1,title:tt,tag:L.audio_tags[i],desc:L.audio_descs[i],url:''}));
+  LS.set('mn_audios',S.audios);
+  S.scripts=L.sc_titles.map((tt,i)=>({title:tt,desc:L.sc_descs[i],steps:L.sc_steps[i]}));
+  LS.set('mn_scripts',S.scripts);
+}
+if(!S.audios||!S.scripts){buildDefaults();}
+
+// ── LOGO SECRET (5 clicks) ──
+let logoCnt=0,logoTimer=null;
+function logoClick(){
+  logoCnt++;clearTimeout(logoTimer);
+  logoTimer=setTimeout(()=>logoCnt=0,1800);
+  if(logoCnt>=5){logoCnt=0;goAdmin();}
+}
+
+// ── PAGES ──
+function showPage(n){
+  if(n==='admin'){goAdmin();return;}
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+n).classList.add('active');
+  window.scrollTo(0,0);
+  if(n==='training')renderTraining();
+  syncUser();
+}
+
+function goAdmin(){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  window.scrollTo(0,0);
+  if(S.admAuth){document.getElementById('page-admin').classList.add('active');renderAdmin();}
+  else{document.getElementById('page-admin-login').classList.add('active');setTimeout(()=>document.getElementById('ali').focus(),200);}
+}
+
+function checkCreds(l,p){
+  if(l===ROOT_LOGIN&&p===ROOT_PASS)return{name:'Super Admin',root:true};
+  const f=ACCS.find(a=>a.login===l&&a.pass===p);
+  return f?{name:f.name,root:false}:null;
+}
+function doAdminLogin(){
+  const l=document.getElementById('ali').value.trim();
+  const p=document.getElementById('api').value;
+  const err=document.getElementById('adm-err');
+  const acc=checkCreds(l,p);
+  if(acc){
+    S.admAuth=true;S.admName=acc.name;LS.set('mn_adm',true);LS.set('mn_admname',acc.name);
+    err.classList.remove('show');
+    document.getElementById('page-admin-login').classList.remove('active');
+    document.getElementById('page-admin').classList.add('active');
+    renderAdmin();toast(`${t('toast_welcome')} ${acc.name}!`,'ok');
+  } else {
+    err.classList.add('show');document.getElementById('api').value='';document.getElementById('api').focus();
+    setTimeout(()=>err.classList.remove('show'),3000);
+  }
+}
+document.getElementById('api').addEventListener('keydown',e=>{if(e.key==='Enter')doAdminLogin();});
+document.getElementById('ali').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('api').focus();});
+function adminLogout(){S.admAuth=false;LS.set('mn_adm',false);showPage('home');toast(lang==='kz'?'Панельден шықтыңыз':'Вы вышли из панели','ok');}
+function togglePass(){const i=document.getElementById('api');i.type=i.type==='password'?'text':'password';}
+
+// ── MODAL ──
+function openModal(){document.getElementById('reg-overlay').classList.add('open');}
+function closeModal(){document.getElementById('reg-overlay').classList.remove('open');}
+document.getElementById('reg-overlay').addEventListener('click',e=>{if(e.target.id==='reg-overlay')closeModal();});
+function doReg(){
+  const name=document.getElementById('rn').value.trim();
+  const phone=document.getElementById('rp').value.trim();
+  if(!name){toast(lang==='kz'?'Атыңды енгіз':'Введи имя','warn');return;}
+  if(!phone){toast(lang==='kz'?'Телефон нөмірін енгіз':'Введи номер телефона','warn');return;}
+  S.user={name,phone,at:new Date().toISOString()};
+  LS.set('mn_user',S.user);
+  if(!S.cands.find(c=>c.phone===phone)){S.cands.push({...S.user});LS.set('mn_cands',S.cands);}
+  closeModal();
+  toast(`${t('toast_welcome')} ${name}! 🎉`,'ok');
+  setTimeout(()=>showPage('training'),400);
+}
+
+// ── USER ──
+function syncUser(){
+  const n=S.user?S.user.name.split(' ')[0]:'—';
+  ['nav-u','nav-u2'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=n;});
+}
+
+// ── TRAINING ──
+function renderTraining(){renderAudios();renderScripts();updateProg();syncUser();}
+
+function togBlock(id){document.getElementById(id).classList.toggle('open');}
+
+function doneBl(n){
+  S.prog[n-1]=true;LS.set('mn_prog',S.prog);updateProg();
+  const done=S.prog.filter(Boolean).length;
+  if(done===1)toast(t('toast_p25'),'ok');
+  else if(done===2)toast(t('toast_p50'),'ok');
+  else if(done===3)toast(t('toast_p75'),'ok');
+  else if(done===4){toast(t('toast_p100'),'ok');const fb=document.getElementById('finish-box');fb.style.display='block';setTimeout(()=>fb.scrollIntoView({behavior:'smooth'}),400);}
+  const nb=document.getElementById('bl'+(n+1));
+  if(nb&&!nb.classList.contains('open'))setTimeout(()=>nb.classList.add('open'),300);
+}
+
+function updateProg(){
+  const done=S.prog.filter(Boolean).length;
+  const pct=Math.round(done/4*100);
+  const g=id=>document.getElementById(id);
+  if(g('pf'))g('pf').style.width=pct+'%';
+  if(g('pct'))g('pct').textContent=pct+'%';
+  if(g('np'))g('np').style.width=pct+'%';
+  const msgs=t('prog_msgs');
+  if(g('pmsg')&&msgs)g('pmsg').textContent=msgs[done]||'';
+  for(let i=1;i<=4;i++){
+    const pd=g('pd'+i);if(pd)pd.className='pdot'+(S.prog[i-1]?' done':(i===done+1?' cur':''));
+    const bn=g('bn'+i);if(bn){bn.className='block-num'+(S.prog[i-1]?' done':'');bn.textContent=S.prog[i-1]?'✓':i;}
+    const db=g('db'+i);if(db){db.disabled=S.prog[i-1];if(S.prog[i-1])db.textContent=lang==='kz'?'✓ Аяқталды':'✓ Выполнено';}
+  }
+  if(done===4){const fb=g('finish-box');if(fb)fb.style.display='block';}
+}
+
+function renderAudios(){
+  const el=document.getElementById('audio-list');if(!el)return;
+  el.innerHTML=S.audios.map(a=>`
+    <div class="acard">
+      <div class="acard-top">
+        <div class="aico">🎧</div>
+        <div><div class="aname">${a.title}</div><div class="atag">${a.tag}</div></div>
+      </div>
+      <div class="adesc">${a.desc}</div>
+      ${a.url?`<audio controls><source src="${a.url}" type="audio/mpeg"/></audio>`:`<div class="aph">${t('audio_ph')}</div>`}
+    </div>`).join('');
+}
+
+function renderScripts(){
+  const el=document.getElementById('sc-list');if(!el)return;
+  el.innerHTML=S.scripts.map((s,i)=>`
+    <div class="sc-item" id="sci${i}">
+      <div class="sc-hdr" onclick="togSc('sci${i}')"><span>${s.title}</span><span style="font-size:.68rem;color:var(--border);">▼</span></div>
+      <div class="sc-body">
+        <p style="font-weight:600;color:var(--text);font-size:.85rem;margin-bottom:9px;">${s.desc||''}</p>
+        ${(s.steps||[]).map((st,si)=>`
+          <div class="sc-step">
+            <div class="sc-n">${si+1}</div>
+            <div>
+              <div style="font-size:.84rem;font-weight:500;color:var(--text);">${st.t}</div>
+              ${st.ex?`<div class="sc-ex">${st.ex}</div>`:''}
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+function togSc(id){document.getElementById(id).classList.toggle('open');}
+
+// ── ADMIN PANEL ──
+function aTab(n){
+  const tabs=['audio','mats','scripts','cands','accs'];
+  document.querySelectorAll('.atab').forEach((tt,i)=>tt.classList.toggle('active',tabs[i]===n));
+  document.querySelectorAll('.apanel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('ap-'+n).classList.add('active');
+}
+
+function renderAdmin(){
+  const g=id=>document.getElementById(id);
+  if(g('adm-stats'))g('adm-stats').innerHTML=`
+    <div class="astat"><div class="astat-n">${S.cands.length}</div><div class="astat-l">Кандидатов</div></div>
+    <div class="astat"><div class="astat-n">${S.audios.length}</div><div class="astat-l">Аудио</div></div>
+    <div class="astat"><div class="astat-n">${S.scripts.length}</div><div class="astat-l">Скриптов</div></div>
+    <div class="astat"><div class="astat-n">${1+ACCS.length}</div><div class="astat-l">Админов</div></div>`;
+  if(g('ac'))g('ac').textContent=`(${S.audios.length})`;
+  if(g('aal'))g('aal').innerHTML=S.audios.length
+    ?S.audios.map((a,i)=>`<div class="aitem"><div>🎧</div><div class="ainfo"><div class="ait">${a.title}</div><div class="aim">${a.tag} · ${a.url?'✓ URL':'Нет URL'}</div></div><button class="del" onclick="delAudio(${i})">Удалить</button></div>`).join('')
+    :'<p class="empty">Нет аудио</p>';
+  if(g('aml'))g('aml').innerHTML=S.mats.length
+    ?S.mats.map((m,i)=>`<div class="aitem"><div>📄</div><div class="ainfo"><div class="ait">${m.title}</div></div><button class="del" onclick="delMat(${i})">Удалить</button></div>`).join('')
+    :'<p class="empty">Нет материалов</p>';
+  if(g('scc'))g('scc').textContent=`(${S.scripts.length})`;
+  if(g('asl'))g('asl').innerHTML=S.scripts.length
+    ?S.scripts.map((s,i)=>`<div class="aitem"><div>📋</div><div class="ainfo"><div class="ait">${s.title}</div><div class="aim">${(s.steps||[]).length} шагов</div></div><button class="del" onclick="delScript(${i})">Удалить</button></div>`).join('')
+    :'<p class="empty">Нет скриптов</p>';
+  if(g('cc'))g('cc').textContent=`(${S.cands.length})`;
+  if(g('acl'))g('acl').innerHTML=S.cands.length
+    ?S.cands.map(c=>`<div class="aitem"><div class="ava">${c.name.charAt(0).toUpperCase()}</div><div class="ainfo"><div class="ait">${c.name}</div><div class="aim">${c.phone||'—'} · ${new Date(c.at).toLocaleDateString('ru')}</div></div></div>`).join('')
+    :'<p class="empty">Кандидатов пока нет</p>';
+  if(g('xc'))g('xc').textContent=`(${1+ACCS.length})`;
+  if(g('axl'))g('axl').innerHTML=
+    `<div class="aitem"><div class="ava" style="background:var(--p);color:#fff;">SA</div><div class="ainfo"><div class="ait">Super Admin<span class="root-tag">Главный</span></div><div class="aim">Логин: ${ROOT_LOGIN} · в коде</div></div></div>`
+    +ACCS.map((a,i)=>`<div class="aitem"><div class="ava">${a.name.charAt(0).toUpperCase()}</div><div class="ainfo"><div class="ait">${a.name}</div><div class="aim">Логин: ${a.login}</div></div><button class="del" onclick="delAcc(${i})">Удалить</button></div>`).join('');
+}
+
+function addAudio(){
+  const n=document.getElementById('an').value.trim();if(!n){toast('Введи название','warn');return;}
+  S.audios.push({id:Date.now(),title:n,tag:document.getElementById('at').value.trim()||'Кейс',desc:document.getElementById('ad').value.trim(),url:document.getElementById('au').value.trim()});
+  LS.set('mn_audios',S.audios);
+  ['an','at','ad','au'].forEach(id=>document.getElementById(id).value='');
+  renderAdmin();toast('Аудио добавлено!','ok');
+}
+function delAudio(i){S.audios.splice(i,1);LS.set('mn_audios',S.audios);renderAdmin();toast('Удалено','ok');}
+function addMat(){
+  const tt=document.getElementById('mtt').value.trim();if(!tt){toast('Введи заголовок','warn');return;}
+  S.mats.push({title:tt,body:document.getElementById('mb').value.trim()});
+  LS.set('mn_mats',S.mats);document.getElementById('mtt').value='';document.getElementById('mb').value='';
+  renderAdmin();toast('Добавлено!','ok');
+}
+function delMat(i){S.mats.splice(i,1);LS.set('mn_mats',S.mats);renderAdmin();toast('Удалено','ok');}
+function addScript(){
+  const tt=document.getElementById('sct').value.trim();if(!tt){toast('Введи название','warn');return;}
+  S.scripts.push({title:tt,desc:document.getElementById('scb').value.trim(),steps:[]});
+  LS.set('mn_scripts',S.scripts);document.getElementById('sct').value='';document.getElementById('scb').value='';
+  renderAdmin();toast('Добавлено!','ok');
+}
+function delScript(i){S.scripts.splice(i,1);LS.set('mn_scripts',S.scripts);renderAdmin();toast('Удалено','ok');}
+function addAcc(){
+  const l=document.getElementById('xl').value.trim();
+  const p=document.getElementById('xp').value;
+  const n=document.getElementById('xn').value.trim();
+  if(!l||!p||p.length<4||!n){toast('Заполни все поля (пароль мин. 4 символа)','warn');return;}
+  if(l===ROOT_LOGIN||ACCS.find(a=>a.login===l)){toast('Логин уже занят','warn');return;}
+  ACCS.push({login:l,pass:p,name:n,at:new Date().toISOString()});
+  LS.set('mn_accs',ACCS);
+  document.getElementById('xl').value='';document.getElementById('xp').value='';document.getElementById('xn').value='';
+  renderAdmin();toast(`Аккаунт "${n}" создан!`,'ok');
+}
+function delAcc(i){const n=ACCS[i].name;ACCS.splice(i,1);LS.set('mn_accs',ACCS);renderAdmin();toast(`"${n}" удалён`,'ok');}
+
+function openWA(){
+  const msg=lang==='kz'
+    ?'Сәлем! Mental сайтынан оқудан өттім, BioSafa сату менеджері вакансиясы туралы білгім келеді.'
+    :'Здравствуйте! Прошёл обучение на сайте Mental, хочу узнать о вакансии менеджера BioSafa.';
+  window.open(`https://wa.me/77067206741?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+function toast(msg,type='info'){
+  const c=document.getElementById('toasts');
+  const t=document.createElement('div');
+  t.className='toast '+(type==='ok'?'ok':type==='warn'?'warn':'');
+  t.innerHTML=`<span>${type==='ok'?'✅':type==='warn'?'⚠️':'ℹ️'}</span><span>${msg}</span>`;
+  c.appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(10px)';setTimeout(()=>t.remove(),280);},3200);
+}
+
+// ── INIT ──
+(function(){
+  applyLang();
+  updateProg();
+  syncUser();
+  if(S.user)toast(`${t('toast_back')} ${S.user.name.split(' ')[0]}! 👋`,'ok');
+})();
+</script>
+</body>
+</html>
